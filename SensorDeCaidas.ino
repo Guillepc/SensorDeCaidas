@@ -17,12 +17,9 @@ LoRaModem modem;
 int estado = 0;
 unsigned long tiempoEstado = 0;
 
-String appEui = "0000000000000000";
-String appKey = "7A69FA362FA959F238E769CB2B0F76CE";
 
 void setup() {
   Serial.begin(115200);
-  gpsSerial.begin(9600);
   Wire.begin();
   mpu.initialize();
 
@@ -41,15 +38,12 @@ void setup() {
     while (1);
   }
 
+  modem.sleep(); // Poner en bajo consumo tras la unión inicial
+
   Serial.println("Sistema de detección de caídas iniciado");
 }
 
 void loop() {
-  // Leer GPS
-  while (gpsSerial.available()) {
-    gps.encode(gpsSerial.read());
-  }
-
   // Leer acelerómetro
   int16_t ax, ay, az;
   mpu.getAcceleration(&ax, &ay, &az);
@@ -84,7 +78,16 @@ void loop() {
     case 3:
       Serial.println("⚠️ ¡CAÍDA DETECTADA!");
 
-      // Obtener ubicación
+      // Activar GPS solo en caso de caída
+      gpsSerial.begin(9600);
+      unsigned long start = millis();
+      while (millis() - start < 3000) { // Esperar hasta 3 segundos para capturar ubicación
+        while (gpsSerial.available()) {
+          gps.encode(gpsSerial.read());
+        }
+      }
+      gpsSerial.end(); // Apagar GPS tras usarlo
+
       float lat = gps.location.isValid() ? gps.location.lat() : 0.0;
       float lon = gps.location.isValid() ? gps.location.lng() : 0.0;
 
@@ -94,11 +97,15 @@ void loop() {
       modem.beginPacket();
       modem.print(mensaje);
       int err = modem.endPacket(true);
+
+
       if (err > 0) {
         Serial.println("Mensaje enviado con éxito");
       } else {
         Serial.println("Error al enviar mensaje");
       }
+
+      modem.sleep(); // Poner LoRa en modo bajo consumo otra vez
 
       estado = 0;
       break;
