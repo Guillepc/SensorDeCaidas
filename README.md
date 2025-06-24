@@ -1,45 +1,59 @@
-📡 Detector de Caídas con Arduino MKR WAN 1310 y LoRaWAN
-Este proyecto consiste en el desarrollo de un sistema IoT portátil para la detección de caídas en personas mayores, utilizando un Arduino MKR WAN 1310, un sensor MPU6050, un módulo GPS NEO-6M y conectividad LoRaWAN a través de The Things Network (TTN).
+---
 
-El sistema detecta caídas mediante un algoritmo basado en aceleración y orientación, obtiene la ubicación del evento y envía una alerta con la posición a través de LoRaWAN. También incluye funcionalidades de bajo consumo para optimizar la duración de la batería.
+# 📡 Detector de Caídas con Arduino MKR WAN 1310 y LoRaWAN
 
-📁 Estructura del repositorio
-Archivo	Descripción
-SensorDeCaidas.ino	Código principal del proyecto. Implementa el algoritmo de detección de caídas, obtiene ubicación por GPS y envía alertas mediante LoRa.
-AlgoritmoCaidas.ino	Implementación específica del algoritmo de detección de caídas utilizando datos del acelerómetro y giroscopio.
-PruebaAcelerometro.ino	Script de prueba para leer y visualizar datos del sensor MPU6050 (aceleración y giro).
-PruebaGps.ino	Código de prueba para comprobar la lectura de datos GPS desde el módulo NEO-6M.
-PruebaLORA.ino	Código de prueba para verificar la conexión y envío de mensajes mediante LoRaWAN.
-CreacionGraficasAceleracion	Script para representar gráficamente los datos de aceleración recogidos, útil para ajustar y validar el algoritmo de detección.
+Este proyecto consiste en el desarrollo de un sistema IoT portátil para la **detección de caídas en personas mayores**, utilizando un **Arduino MKR WAN 1310**, un **sensor MPU6050**, un **módulo GPS NEO-6M** y conectividad **LoRaWAN** a través de **The Things Network (TTN)**.
 
-🔧 Tecnologías y componentes
-Arduino MKR WAN 1310
+El sistema detecta caídas mediante un algoritmo basado en aceleración y orientación, obtiene la ubicación del evento y envía una alerta con la posición a través de LoRaWAN. También incluye funcionalidades de **bajo consumo energético** para optimizar la duración de la batería.
 
-Sensor MPU6050 (acelerómetro y giroscopio)
+---
 
-Módulo GPS NEO-6M
+## 📁 Estructura del repositorio
 
-The Things Network (TTN)
+| Archivo                       | Descripción                                                              |
+| ----------------------------- | ------------------------------------------------------------------------ |
+| `SensorDeCaidas.ino`          | Código principal del proyecto: detección de caídas, GPS y envío LoRa.    |
+| `AlgoritmoCaidas.ino`         | Implementación del algoritmo de detección utilizando aceleración y giro. |
+| `PruebaAcelerometro.ino`      | Lectura de datos del sensor MPU6050 para pruebas iniciales.              |
+| `PruebaGps.ino`               | Lectura y visualización de coordenadas GPS desde el módulo NEO-6M.       |
+| `PruebaLORA.ino`              | Pruebas de conexión y envío de paquetes mediante LoRaWAN.                |
+| `CreacionGraficasAceleracion` | Script para generar gráficas de aceleración y evaluar el algoritmo.      |
 
-Plataforma de visualización de datos y correo vía webhook
+---
 
-📬 Funcionalidad destacada
-Detección de caídas clasificadas por tipo
+## 🔧 Tecnologías y componentes
 
-Obtención de ubicación al detectar una caída
+* ⚙️ **Arduino MKR WAN 1310**
+* 📈 **Sensor MPU6050** (acelerómetro y giroscopio)
+* 🌐 **Módulo GPS NEO-6M**
+* 📡 **LoRaWAN** a través de **The Things Network (TTN)**
+* 📬 **Webhook** para notificación por correo electrónico
 
-Envío de alerta vía LoRaWAN a TTN
+---
 
-Notificación automática por correo electrónico (vía webhook)
+## 📬 Funcionalidad destacada
 
-Modo de bajo consumo entre envíos para prolongar batería
+* ✔️ Detección de caídas clasificadas por tipo
+* 🌍 Obtención de coordenadas geográficas tras una caída
+* 🚀 Envío de alertas por LoRaWAN a TTN
+* 📧 Notificación automática por correo electrónico
+* 🔋 Modo de bajo consumo entre transmisiones
 
-📌 Estado del proyecto
-✅ Funcionalidad de detección implementada
-✅ Comunicación con TTN verificada
-✅ Envío de alertas con localización funcional
-⏳ Posible mejora futura con IA y miniaturización
+---
 
-🧠 Autor
-Este proyecto ha sido desarrollado como parte de un Trabajo de Fin de Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación.
+## 📌 Estado del proyecto
 
+* ✅ Funcionalidad de detección implementada
+* ✅ Comunicación y envío a TTN verificados
+* ✅ Integración con correo electrónico operativa
+* 🔄 Posible mejora futura con IA, miniaturización y nuevas tecnologías de localización
+
+---
+
+## 🧠 Autor
+
+Este proyecto ha sido desarrollado como parte del **Trabajo de Fin de Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación**.
+
+---
+
+¿Quieres que añada una sección opcional para requisitos o cómo cargar los códigos al MKR WAN 1310?
