@@ -1,0 +1,52 @@
+import re
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Archivo con los datos copiados
+filename = "aaa.txt" #poner fichero que queramos leer
+
+# Expresión regular para extraer Ax, Ay, Az
+pattern = re.compile(r"AX:\s*(-?\d+\.\d+)\s+AY:\s*(-?\d+\.\d+)\s+AZ:\s*(-?\d+\.\d+)")
+
+Ax, Ay, Az = [], [], []
+
+with open(filename, "r", encoding="utf-8") as f:
+
+    for line in f:
+        match = pattern.search(line)
+        if match:
+            Ax.append(float(match.group(1)))
+            Ay.append(float(match.group(2)))
+            Az.append(float(match.group(3)))
+
+Ax = np.array(Ax)
+Ay = np.array(Ay)
+Az = np.array(Az)
+
+# Calcular aceleración total
+Atotal = np.sqrt(Ax**2 + Ay**2 + Az**2)
+
+# Crear eje temporal en muestras
+t = np.arange(len(Atotal))
+
+# Graficar aceleración total
+plt.figure(figsize=(10,5))
+plt.plot(t, Atotal, label='Aceleración total')
+plt.xlabel('Muestras')
+plt.ylabel('Aceleración (g)')
+plt.title('Gráfica de aceleración total durante caída')
+plt.grid()
+plt.legend()
+plt.show()
+
+# Opcional: graficar Ax, Ay, Az por separado
+plt.figure(figsize=(10,5))
+plt.plot(t, Ax, label='Ax')
+plt.plot(t, Ay, label='Ay')
+plt.plot(t, Az, label='Az')
+plt.xlabel('Muestras')
+plt.ylabel('Aceleración (g)')
+plt.title('Componentes de aceleración durante caída')
+plt.grid()
+plt.legend()
+plt.show()
